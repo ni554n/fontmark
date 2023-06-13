@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "types": ["vite/client", "chrome-types"],
+    "module": "ESNext",
+    "moduleResolution": "node",
     "noEmit": true,
-    "isolatedModules": true
+    "strict": true,
+    "target": "ESNext",
+    "types": ["vite/client", "chrome-types"],
+    "verbatimModuleSyntax": true
   }
 }

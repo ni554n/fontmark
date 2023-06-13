@@ -3,6 +3,51 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {}
+@layer base {
+  html {
+    --s: #5f6368;
 
-@layer components {}
+    scrollbar-width: thin;
+    scrollbar-color: var(--s) var(--s / 15%);
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--s / 15%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--s);
+    background-clip: padding-box;
+    border: 2px solid transparent;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:vertical:hover,
+  ::-webkit-scrollbar-thumb:horizontal:hover {
+    border: 1px solid transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:vertical:active,
+  ::-webkit-scrollbar-thumb:horizontal:active {
+    border: 2px solid var(--s);
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .action::before {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300
+  }
+
+  .action::after {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300
+  }
+}
