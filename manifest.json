@@ -13,13 +13,7 @@
     "default_popup": "dist/index.html"
   },
   "host_permissions": ["*://fonts.google.com/*"],
-  "permissions": [
-    "contextMenus",
-    "bookmarks",
-    "management",
-    "storage",
-    "declarativeContent"
-  ],
+  "permissions": ["bookmarks"],
   "background": {
     "service_worker": "worker.js"
   }
