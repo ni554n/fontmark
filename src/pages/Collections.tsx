@@ -1,6 +1,11 @@
-import { bookmarks, FontList, hoveringCard, isEditing } from "./FontList";
-import { Header } from "./Header";
-import { pluralize } from "./utils";
+import {
+  bookmarks,
+  FontList,
+  hoveringCard,
+  isEditing,
+} from "../components/FontList";
+import { Header } from "../components/Header";
+import { pluralize } from "../components/utils";
 
 export function Collections() {
   const countFonts = () => {

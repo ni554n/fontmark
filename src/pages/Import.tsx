@@ -1,6 +1,11 @@
-import { FontList, hoveringCard, isEditing, setBookmarks } from "./FontList";
-import { Header } from "./Header";
-import { pluralize } from "./utils";
+import {
+  FontList,
+  hoveringCard,
+  isEditing,
+  setBookmarks,
+} from "../components/FontList";
+import { Header } from "../components/Header";
+import { pluralize } from "../components/utils";
 
 export function Importer(sharedFonts: string[]) {
   return (

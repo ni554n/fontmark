@@ -1,9 +1,9 @@
 import { createSignal, type JSX } from "solid-js";
 import { render } from "solid-js/web";
-import { Collections } from "./components/Collections";
-import { Importer } from "./components/Import";
-import { Marker } from "./components/Bookmark";
 import "./index.css";
+import { Marker } from "./pages/Bookmark";
+import { Collections } from "./pages/Collections";
+import { Importer } from "./pages/Import";
 
 function Body(): JSX.Element {
   const [tabUrl, setTabUrl] = createSignal<string | undefined | null>(null);

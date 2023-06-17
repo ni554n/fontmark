@@ -1,6 +1,11 @@
 import { type JSX } from "solid-js/jsx-runtime";
-import { FontList, hoveringCard, isEditing, setBookmarks } from "./FontList";
-import { Header } from "./Header";
+import {
+  FontList,
+  hoveringCard,
+  isEditing,
+  setBookmarks,
+} from "../components/FontList";
+import { Header } from "../components/Header";
 
 export function Marker(fontName: string) {
   const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = ({
