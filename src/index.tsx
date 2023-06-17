@@ -32,11 +32,13 @@ function Body(): JSX.Element {
         gFontUrl.searchParams.get("selection.family")?.split("|") ?? [],
       );
     }
+
+    return Collections();
   };
 
   return (
     <div class="w-80 border border-[#5f6368] bg-[#202124] text-[#e8eaed]">
-      {tabUrl !== null && page()}
+      {tabUrl() !== null && page()}
     </div>
   );
 }
