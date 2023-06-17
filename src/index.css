@@ -43,11 +43,15 @@
 }
 
 @layer components {
-  .action::before {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300
+  .swap-fade {
+    @apply transition-opacity duration-500
   }
 
-  .action::after {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300
+  .swap-fade::before {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0;
+  }
+
+  .swap-fade::after {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 text-[#8ab4f8] text-lg opacity-0;
   }
 }

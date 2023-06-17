@@ -1,10 +1,6 @@
 import { type JSX } from "solid-js/jsx-runtime";
-import {
-  FontList,
-  hoveringCard,
-  hoveringInput,
-  setBookmarks,
-} from "./FontList";
+import { FontList, hoveringCard, isEditing, setBookmarks } from "./FontList";
+import { Header } from "./Header";
 
 export function Marker(fontName: string) {
   const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = ({
@@ -28,10 +24,11 @@ export function Marker(fontName: string) {
 
   return (
     <>
-      <div class="border-b border-b-[#5f6368] p-4">
-        <h1 class="text-lg">Add to collection</h1>
-        <p class="text-[#9aa0a6]">{fontName}</p>
-      </div>
+      <Header title="Bookmark">
+        <p class="text-[#9aa0a6]">
+          Add <span class="font-bold">{fontName}</span> to a collection
+        </p>
+      </Header>
 
       <FontList
         class="px-3 py-3.5"
@@ -52,24 +49,27 @@ export function Marker(fontName: string) {
 
           return (
             <button
-              class={`action relative basis-[15%] transition-opacity duration-500 before:content-['+_Add'] after:content-['Ⅰ_Rename'] ${
-                isFontSaved || hoveringCard() === hoveredBookmark.id
-                  ? "opacity-100"
-                  : "opacity-0"
-              } ${
-                hoveringInput() === hoveredBookmark.id
-                  ? "before:opacity-0 after:opacity-100"
-                  : "before:opacity-100 after:opacity-0"
-              } ${
-                isFontSaved
-                  ? `${
+              class={`swap-fade relative basis-[15%] before:content-['☆_Remove'] after:content-['★'] ${
+                isEditing() || !isFontSaved
+                  ? hoveringCard() === hoveredBookmark.id
+                    ? "opacity-100"
+                    : "opacity-0"
+                  : `opacity-100 ${
                       hoveringCard() === hoveredBookmark.id
-                        ? "before:text-lg before:[--tw-content:'☆']"
-                        : "before:text-lg before:text-[#8ab4f8] before:[--tw-content:'★']"
+                        ? "before:opacity-100"
+                        : "after:opacity-100"
                     }`
-                  : null
               }`}
-            />
+            >
+              {isEditing() ? (
+                "Ⅰ Rename"
+              ) : isFontSaved ? null : (
+                <span>
+                  +<br />
+                  Add
+                </span>
+              )}
+            </button>
           );
         }}
         onCardClick={(clickedBookmark, index) => {

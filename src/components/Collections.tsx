@@ -1,4 +1,5 @@
-import { bookmarks, FontList, hoveringCard, hoveringInput } from "./FontList";
+import { bookmarks, FontList, hoveringCard, isEditing } from "./FontList";
+import { Header } from "./Header";
 import { pluralize } from "./utils";
 
 export function Collections() {
@@ -16,19 +17,16 @@ export function Collections() {
 
   return (
     <>
-      <div class="border-b border-b-[#5f6368] p-4">
-        <h1 class="text-xl font-medium">Collection</h1>
-        <p class="text-[#9aa0a6]">
-          {pluralize(countFonts(), "font")} in{" "}
-          {pluralize(bookmarks.length, "collection")}
-        </p>
-      </div>
+      <Header title="Collections">
+        {pluralize(countFonts(), "font")} in{" "}
+        {pluralize(bookmarks.length, "collection")}
+      </Header>
 
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex flex-1 flex-col items-center justify-center">
-            <h1>No collection</h1>
+          <div class="flex h-40 flex-1 flex-col items-center justify-center">
+            <h1>No collections</h1>
             <p>
               Visit a font page like{" "}
               <a
@@ -44,16 +42,14 @@ export function Collections() {
         }
         actionIndicator={(hoveredBookmark) => (
           <button
-            class={`action relative basis-[15%] transition-opacity duration-500 before:content-['↗_View'] after:content-['Ⅰ_Rename'] ${
+            class={`relative basis-[15%] transition-opacity duration-500 ${
               hoveringCard() === hoveredBookmark.id
                 ? "opacity-100"
                 : "opacity-0"
-            } ${
-              hoveringInput() === hoveredBookmark.id
-                ? "before:opacity-0 after:opacity-100"
-                : "before:opacity-100 after:opacity-0"
             }`}
-          />
+          >
+            {isEditing() ? "Ⅰ Rename" : "↗ View"}
+          </button>
         )}
         onCardClick={(clickedBookmark) => {
           chrome.tabs.create({ url: clickedBookmark.url });

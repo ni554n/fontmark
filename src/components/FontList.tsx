@@ -5,7 +5,6 @@ import {
   type Component,
   type JSXElement,
   type Accessor,
-  type JSX,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 
@@ -16,7 +15,8 @@ export const [bookmarks, setBookmarks] = createStore<
 chrome.bookmarks.search("https://fonts.google.com/share?", setBookmarks);
 
 export const [hoveringCard, setHoveringCard] = createSignal<string>("");
-export const [hoveringInput, setHoveringInput] = createSignal<string>("");
+
+export const [isEditing, setIsEditing] = createSignal(false);
 
 export const FontList: Component<{
   class: string;
@@ -28,17 +28,14 @@ export const FontList: Component<{
     index: number,
   ) => void;
 }> = (props) => {
-  function clickLink({
+  function clickCard({
     bookmark,
     index,
   }: {
     bookmark: chrome.bookmarks.BookmarkTreeNode;
     index: Accessor<number>;
   }) {
-    if (hoveringInput()) {
-      setHoveringInput("");
-      return;
-    }
+    if (isEditing()) return;
 
     props.onCardClick(bookmark, index());
   }
@@ -52,7 +49,7 @@ export const FontList: Component<{
           {(bookmark, index) => (
             <section
               class="flex w-full items-center justify-between gap-2 rounded-lg border border-[#5f6368] p-4 hover:cursor-pointer hover:border-[#8ab4f8] hover:bg-[#292c35]"
-              onClick={[clickLink, { bookmark, index }]}
+              onClick={[clickCard, { bookmark, index }]}
               onMouseOver={() => setHoveringCard(bookmark.id)}
               onMouseOut={() => setHoveringCard("")}
             >
@@ -62,15 +59,12 @@ export const FontList: Component<{
                     type="text"
                     value={bookmark.title}
                     placeholder="Collection Name"
-                    class="text-xm flex-1 bg-transparent"
+                    class={`text-xm flex-1 bg-transparent ${
+                      isEditing()
+                        ? "rounded-sm outline outline-1 outline-offset-1 outline-[#e8eaed] focus:outline-[#8ab4f8]"
+                        : "pointer-events-none"
+                    }`}
                     onClick={(event) => event.stopPropagation()}
-                    onMouseEnter={() => {
-                      setHoveringInput(bookmark.id);
-                    }}
-                    onMouseLeave={(event) => {
-                      if (document.activeElement !== event.currentTarget)
-                        setHoveringInput("");
-                    }}
                     onChange={(event) => {
                       chrome.bookmarks.update(bookmark.id, {
                         title: event.currentTarget.value,
