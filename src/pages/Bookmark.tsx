@@ -22,7 +22,8 @@ export function Marker(fontName: string) {
       (addedBookmark) => {
         setBookmarks((bookmarks) => bookmarks.concat(addedBookmark));
 
-        currentTarget.scrollIntoView({ behavior: "smooth" });
+        e.currentTarget.scrollIntoView({ behavior: "smooth" });
+        chrome.action.setBadgeText({ tabId, text: "✓" });
       },
     );
   };
@@ -91,6 +92,8 @@ export function Marker(fontName: string) {
               "selection.family",
               `${bookmarkedFontString}|${fontName.replaceAll(" ", "+")}`,
             );
+
+            chrome.action.setBadgeText({ tabId, text: "✓" });
           } else {
             savedFonts.splice(position, 1);
 
@@ -98,6 +101,8 @@ export function Marker(fontName: string) {
               "selection.family",
               savedFonts.join("|"),
             );
+
+            chrome.action.setBadgeText({ tabId, text: "" });
           }
 
           // `|` gets encoded in `searchParams`.
