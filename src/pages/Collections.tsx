@@ -53,7 +53,17 @@ export function Collections() {
                 : "opacity-0"
             }`}
           >
-            {isEditing() ? "Ⅰ Rename" : "↗ View"}
+            {isEditing() ? (
+              <span>
+                Ⅰ<br />
+                Rename
+              </span>
+            ) : (
+              <span>
+                ↗<br />
+                View
+              </span>
+            )}
           </button>
         )}
         onCardClick={(clickedBookmark) => {

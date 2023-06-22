@@ -47,7 +47,17 @@ export function Importer(sharedFonts: string[]) {
                     }`
               }`}
             >
-              {isEditing() ? "Ⅰ Rename" : areFontsImported ? null : "+ Import"}
+              {isEditing() ? (
+                <span>
+                  Ⅰ<br />
+                  Rename
+                </span>
+              ) : areFontsImported ? null : (
+                <span>
+                  +<br />
+                  Import
+                </span>
+              )}
             </button>
           );
         }}

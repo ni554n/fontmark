@@ -68,7 +68,10 @@ export function Marker(fontName: string) {
               }`}
             >
               {isEditing() ? (
-                "Ⅰ Rename"
+                <span>
+                  Ⅰ<br />
+                  Rename
+                </span>
               ) : isFontSaved ? null : (
                 <span>
                   +<br />
@@ -122,7 +125,7 @@ export function Marker(fontName: string) {
           class="ml-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
           onClick={addIntoNewBookmark}
         >
-          + Create & Save
+          + Create new
         </button>
       </FontList>
     </>
