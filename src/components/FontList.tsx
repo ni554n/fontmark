@@ -88,7 +88,7 @@ export const FontList: Component<{
                         placeholder="Collection Name"
                         class={`text-xm flex-1 bg-transparent ${
                           isEditing()
-                            ? "rounded-sm outline outline-1 outline-offset-1 outline-[#e8eaed] focus:outline-[#8ab4f8]"
+                            ? "rounded-sm outline outline-1 outline-offset-2 outline-[#e8eaed]/60 focus:outline-[#8ab4f8]"
                             : "pointer-events-none"
                         }`}
                         onClick={(event) => event.stopPropagation()}
@@ -103,7 +103,9 @@ export const FontList: Component<{
                       />
                     </div>
 
-                    <p class="text-[#9aa0a6]">{getFontNames(bookmark.url!)}</p>
+                    <p class={`text-[#9aa0a6] ${isEditing() ? "mt-1" : null}`}>
+                      {getFontNames(bookmark.url!)}
+                    </p>
                   </div>
 
                   {props.actionIndicator(bookmark)}

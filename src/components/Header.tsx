@@ -1,6 +1,7 @@
 import { Show, type Component, type JSXElement } from "solid-js";
 import { bookmarks, isEditing, setIsEditing } from "./FontList";
 import { EditIcon } from "./assets/EditIcon";
+import { animateRipple } from "./utils";
 
 export const Header: Component<{
   title: string;
@@ -8,7 +9,7 @@ export const Header: Component<{
 }> = (props) => (
   <div class="flex items-center border-b border-b-[#5f6368] p-4">
     <div class="flex-1">
-      <h1 class="text-xl font-medium">
+      <h1 class={`font-medium ${isEditing() ? "text-lg" : "text-xl"}`}>
         {isEditing() ? "Edit Collections" : props.title}
       </h1>
 
@@ -23,12 +24,17 @@ export const Header: Component<{
 
     <Show when={bookmarks.length > 0}>
       <button
-        class={`rounded-full p-2 transition-colors hover:bg-[#464749] ${
-          isEditing() ? "bg-[#e8eaed] hover:bg-[#e8eaed]" : null
+        class={`rounded-full p-2 transition-colors ${
+          isEditing() ? "bg-[#e8eaed]" : "hover:bg-[#464749]"
         }`}
-        onClick={() => setIsEditing((isEditing) => !isEditing)}
+        onClick={(e) => {
+          animateRipple(e);
+          setIsEditing((isEditing) => !isEditing);
+        }}
       >
-        <EditIcon class="h-6 w-6 fill-[#9aa0a6]" />
+        <EditIcon
+          class={`h-6 w-6 ${isEditing() ? "fill-[#464749]" : "fill-[#9aa0a6]"}`}
+        />
       </button>
     </Show>
   </div>
