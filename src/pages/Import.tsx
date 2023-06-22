@@ -69,7 +69,7 @@ export function Importer(gFontUrl: URL) {
 
           return (
             <button
-              class={`swap-fade relative basis-[15%] before:content-['☆_Remove'] after:content-['★'] ${
+              class={`swap-fade relative basis-[15%] before:content-['☆_Undo'] after:content-['★'] ${
                 isEditing() || !areFontsImported
                   ? hoveringCard() === hoveredBookmark.id
                     ? "opacity-100"
@@ -128,7 +128,12 @@ export function Importer(gFontUrl: URL) {
           );
         }}
       >
-        <p class="mt-2 text-center">You can also bookmark it normally</p>
+        <button
+          class="ml-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
+          onClick={addIntoNewBookmark}
+        >
+          + Create new
+        </button>
       </FontList>
     </>
   );
