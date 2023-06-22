@@ -99,31 +99,32 @@ export function Bookmark(fontName: string, tabId: number) {
         onCardClick={(clickedBookmark, index) => {
           const bookmarkUrl = new URL(clickedBookmark.url!);
 
+          // Replaces + with spaces.
           const bookmarkedFontString: string =
             bookmarkUrl.searchParams.get("selection.family") ?? "";
 
-          const savedFonts = bookmarkedFontString.split("|") ?? [];
+          const savedFonts = bookmarkedFontString
+            ? bookmarkedFontString.split("|")
+            : [];
+
           const position = savedFonts.indexOf(fontName);
 
           if (position === -1) {
-            bookmarkUrl.searchParams.set(
-              "selection.family",
-              `${bookmarkedFontString}|${fontName.replaceAll(" ", "+")}`,
-            );
-
             chrome.action.setBadgeText({ tabId, text: "✓" });
+
+            savedFonts.push(fontName);
           } else {
-            savedFonts.splice(position, 1);
-
-            bookmarkUrl.searchParams.set(
-              "selection.family",
-              savedFonts.join("|"),
-            );
-
             chrome.action.setBadgeText({ tabId, text: "" });
+
+            savedFonts.splice(position, 1);
           }
 
-          // `|` gets encoded in `searchParams`.
+          // Replaces spaces with + and `|` with %7C.
+          bookmarkUrl.searchParams.set(
+            "selection.family",
+            savedFonts.join("|"),
+          );
+
           // But Google Fonts website share link format prefers it to be `|`.
           bookmarkUrl.search = decodeURIComponent(bookmarkUrl.search);
 
