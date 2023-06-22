@@ -7,10 +7,13 @@ import {
   setBookmarks,
 } from "../components/FontList";
 import { Header } from "../components/Header";
+import { animateRipple } from "../components/utils";
+
 export function Bookmark(fontName: string, tabId: number) {
   const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
     e,
   ) => {
+    animateRipple(e);
 
     chrome.bookmarks.create(
       {

@@ -54,4 +54,13 @@
   .swap-fade::after {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 text-[#8ab4f8] text-lg opacity-0;
   }
+
+  button:has(span.ripple) {
+    @apply relative overflow-hidden;
+  }
+
+  span.ripple {
+    @apply absolute rounded-full bg-[#8ab4f8]/20 animate-ripple;
+    transform: scale(0); /* 'scale-0' utility won't work due to its composite nature */
+  }
 }

@@ -7,6 +7,7 @@ import {
   type Accessor,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { animateRipple } from "./utils";
 
 export const [bookmarks, setBookmarks] = createStore<
   chrome.bookmarks.BookmarkTreeNode[]
@@ -36,6 +37,7 @@ export const FontList: Component<{
     index: Accessor<number>;
   }) {
     if (isEditing()) return;
+    animateRipple(e);
 
     props.onCardClick(bookmark, index());
   }

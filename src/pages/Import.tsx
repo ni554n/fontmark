@@ -7,7 +7,7 @@ import {
   setBookmarks,
 } from "../components/FontList";
 import { Header } from "../components/Header";
-import { pluralize } from "../components/utils";
+import { animateRipple, pluralize } from "../components/utils";
 
 export function Importer(gFontUrl: URL) {
   const sharedFonts: string[] =
@@ -16,6 +16,7 @@ export function Importer(gFontUrl: URL) {
   const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
     e,
   ) => {
+    animateRipple(e);
 
     chrome.bookmarks.create(
       {
