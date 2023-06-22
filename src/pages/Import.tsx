@@ -1,5 +1,7 @@
+import type { JSX } from "solid-js/jsx-runtime";
 import {
   FontList,
+  bookmarks,
   hoveringCard,
   isEditing,
   setBookmarks,
@@ -7,19 +9,50 @@ import {
 import { Header } from "../components/Header";
 import { pluralize } from "../components/utils";
 
-export function Importer(sharedFonts: string[]) {
+export function Importer(gFontUrl: URL) {
+  const sharedFonts: string[] =
+    gFontUrl.searchParams.get("selection.family")?.split("|") ?? [];
+
+  const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
+    e,
+  ) => {
+
+    chrome.bookmarks.create(
+      {
+        title: "Collection - Google Fonts",
+        url: gFontUrl.href,
+      },
+      (addedBookmark) => {
+        setBookmarks(bookmarks.length, addedBookmark);
+
+        e.currentTarget.scrollIntoView({ behavior: "smooth" });
+      },
+    );
+  };
+
   return (
     <>
-      <Header title="Import">
-        {pluralize(sharedFonts.length, "font")} into an existing collection
+      <Header title={`Import ${pluralize(sharedFonts.length, "font")}`}>
+        Into {bookmarks.length === 0 ? "a new" : "an existing"} collection
       </Header>
 
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex flex-1 flex-col items-center justify-center">
-            <h1>No collection to import into</h1>
-            <p>Bookmark it normally</p>
+          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
+            <button
+              class="mx-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
+              onClick={addIntoNewBookmark}
+            >
+              ★ Bookmark
+            </button>
+
+            <p class="w-3/4 text-center">
+              A new bookmark will be added in the
+              <br />
+              <span class="font-bold">Other bookmarks</span> folder, but it can
+              be reorganized.
+            </p>
           </div>
         }
         actionIndicator={(

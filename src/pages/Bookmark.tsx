@@ -1,16 +1,17 @@
 import { type JSX } from "solid-js/jsx-runtime";
 import {
   FontList,
+  bookmarks,
   hoveringCard,
   isEditing,
   setBookmarks,
 } from "../components/FontList";
 import { Header } from "../components/Header";
+export function Bookmark(fontName: string, tabId: number) {
+  const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
+    e,
+  ) => {
 
-export function Marker(fontName: string) {
-  const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = ({
-    currentTarget,
-  }) => {
     chrome.bookmarks.create(
       {
         title: "Collection - Google Fonts",
@@ -20,7 +21,7 @@ export function Marker(fontName: string) {
         )}`,
       },
       (addedBookmark) => {
-        setBookmarks((bookmarks) => bookmarks.concat(addedBookmark));
+        setBookmarks(bookmarks.length, addedBookmark);
 
         e.currentTarget.scrollIntoView({ behavior: "smooth" });
         chrome.action.setBadgeText({ tabId, text: "✓" });
@@ -32,15 +33,26 @@ export function Marker(fontName: string) {
     <>
       <Header title="Bookmark">
         <p class="text-[#9aa0a6]">
-          Add <span class="font-bold">{fontName}</span> to a collection
+          Add <span class="font-bold">{fontName}</span> to{" "}
+          {bookmarks.length === 0 ? "a new" : "a"} collection
         </p>
       </Header>
 
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex flex-1 flex-col items-center justify-center">
-            <h1>No collection</h1>
+          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
+            <button
+              class="mx-auto mt-1 block w-fit rounded-lg border border-current p-2 text-center text-[#8ab4f8] hover:bg-[#8ab4f8]/10"
+              onClick={addIntoNewBookmark}
+            >
+              + New collection
+            </button>
+            <p class="w-3/4 text-center">
+              This font will be added to a new bookmark in the{" "}
+              <span class="font-bold text-white">Other bookmarks</span> folder,
+              but it can be reorganized.
+            </p>
           </div>
         }
         actionIndicator={(

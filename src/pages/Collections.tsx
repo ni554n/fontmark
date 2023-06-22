@@ -30,12 +30,13 @@ export function Collections() {
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex h-40 flex-1 flex-col items-center justify-center">
-            <h1>No collections</h1>
-            <p>
-              Visit a font page like{" "}
+          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2">
+            <p>༼ つ ◕_◕ ༽つ</p>
+            <p class="w-3/4 text-center text-sm">
+              Visit a Google Fonts page like
+              <br />
               <a
-                class="underline"
+                class="underline underline-offset-2"
                 href="https://fonts.google.com/specimen/Roboto"
                 target="_blank"
               >
