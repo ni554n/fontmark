@@ -4,11 +4,25 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    --s: #5f6368;
+  :root {
+    --color-base: 32 33 36; /* #202124 */
+    --color-base-content: 232 234 237; /* #e8eaed */
+    --color-neutral: 95 99 104; /* #5f6368 */
+    --color-neutral-content: 154 160 166; /* #9aa0a6 */
+    --color-accent: 138 180 248; /* #8ab4f8 */
 
+    @media (prefers-color-scheme: light) {
+      --color-base: 255 255 255; /* #ffffff */
+      --color-base-content: 32 33 36; /* #202124 */
+      --color-neutral: 158 158 158; /* #9e9e9e */
+      --color-neutral-content: 95 99 104; /* #5f6368 */
+      --color-accent: 25 103 210; /* #1967D2 */
+    }
+  }
+
+  html {
     scrollbar-width: thin;
-    scrollbar-color: var(--s) var(--s / 15%);
+    scrollbar-color: rgb(var(--color-neutral)) rgb(var(--color-neutral / 15%));
   }
 
   ::-webkit-scrollbar {
@@ -17,11 +31,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: var(--s / 15%);
+    background-color: rgb(var(--color-neutral / 15%));
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: var(--s);
+    background-color: rgb(var(--color-neutral));
     background-clip: padding-box;
     border: 2px solid transparent;
     border-radius: 5px;
@@ -34,7 +48,7 @@
 
   ::-webkit-scrollbar-thumb:vertical:active,
   ::-webkit-scrollbar-thumb:horizontal:active {
-    border: 2px solid var(--s);
+    border: 2px solid rgb(var(--color-neutral));
   }
 
   ::-webkit-scrollbar-corner {
@@ -44,15 +58,15 @@
 
 @layer components {
   .swap-fade {
-    @apply transition-opacity duration-500
+    @apply transition-opacity duration-500;
   }
 
   .swap-fade::before {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-0;
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300;
   }
 
   .swap-fade::after {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300 text-[#8ab4f8] text-lg opacity-0;
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-accent opacity-0 transition-opacity duration-300;
   }
 
   button:has(span.ripple) {
@@ -60,7 +74,9 @@
   }
 
   span.ripple {
-    @apply absolute rounded-full bg-[#8ab4f8]/20 animate-ripple;
-    transform: scale(0); /* 'scale-0' utility won't work due to its composite nature */
+    @apply absolute animate-ripple rounded-full bg-accent/20;
+    transform: scale(
+      0
+    ); /* 'scale-0' utility won't work due to its composite nature */
   }
 }

@@ -75,7 +75,7 @@ export const FontList: Component<{
             {(bookmark, index) => (
               <div class="flex gap-2">
                 <button
-                  class="flex w-full items-center justify-between gap-2 rounded-lg border border-[#5f6368] p-4 text-start hover:border-[#8ab4f8] hover:bg-[#292c35]"
+                  class="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral p-4 text-start hover:border-accent hover:bg-accent/5"
                   onClick={[clickCard, { bookmark, index }]}
                   onMouseOver={() => setHoveringCard(bookmark.id)}
                   onMouseOut={() => setHoveringCard("")}
@@ -88,7 +88,7 @@ export const FontList: Component<{
                         placeholder="Collection Name"
                         class={`text-xm flex-1 bg-transparent ${
                           isEditing()
-                            ? "rounded-sm outline outline-1 outline-offset-2 outline-[#e8eaed]/60 focus:outline-[#8ab4f8]"
+                            ? "rounded-sm outline outline-1 outline-offset-2 outline-base-content/60 focus:outline-accent"
                             : "pointer-events-none"
                         }`}
                         onClick={(event) => event.stopPropagation()}
@@ -103,7 +103,11 @@ export const FontList: Component<{
                       />
                     </div>
 
-                    <p class={`text-[#9aa0a6] ${isEditing() ? "mt-1" : null}`}>
+                    <p
+                      class={`text-neutral-content ${
+                        isEditing() ? "mt-1" : null
+                      }`}
+                    >
                       {getFontNames(bookmark.url!)}
                     </p>
                   </div>
@@ -113,7 +117,7 @@ export const FontList: Component<{
 
                 <Show when={isEditing()}>
                   <button
-                    class="rounded-lg hover:text-[#8ab4f8]"
+                    class="rounded-lg hover:text-accent"
                     onClick={[
                       deleteBookmark,
                       { bookmarkId: bookmark.id, index },

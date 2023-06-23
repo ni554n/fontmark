@@ -42,7 +42,7 @@ export function Importer(gFontUrl: URL) {
         emptyState={
           <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
             <button
-              class="mx-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
+              class="border-neutral mx-auto mt-1 block w-fit rounded-lg border p-2 text-center"
               onClick={addIntoNewBookmark}
             >
               ★ Bookmark
@@ -129,7 +129,7 @@ export function Importer(gFontUrl: URL) {
         }}
       >
         <button
-          class="ml-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
+          class="border-neutral ml-auto mt-1 block w-fit rounded-lg border p-2 text-center"
           onClick={addIntoNewBookmark}
         >
           + Create new

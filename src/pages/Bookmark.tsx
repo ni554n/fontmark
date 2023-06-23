@@ -35,7 +35,7 @@ export function Bookmark(fontName: string, tabId: number) {
   return (
     <>
       <Header title="Bookmark">
-        <p class="text-[#9aa0a6]">
+        <p class="text-neutral-content">
           Add <span class="font-bold">{fontName}</span> to{" "}
           {bookmarks.length === 0 ? "a new" : "a"} collection
         </p>
@@ -46,7 +46,7 @@ export function Bookmark(fontName: string, tabId: number) {
         emptyState={
           <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
             <button
-              class="mx-auto mt-1 block w-fit rounded-lg border border-current p-2 text-center text-[#8ab4f8] hover:bg-[#8ab4f8]/10"
+              class="mx-auto mt-1 block w-fit rounded-lg border border-current p-2 text-center text-accent hover:bg-accent/10"
               onClick={addIntoNewBookmark}
             >
               + New collection
@@ -138,7 +138,7 @@ export function Bookmark(fontName: string, tabId: number) {
         }}
       >
         <button
-          class="ml-auto mt-1 block w-fit rounded-lg border border-[#5f6368] p-2 text-center"
+          class="ml-auto mt-1 block w-fit rounded-lg border border-neutral p-2 text-center"
           onClick={addIntoNewBookmark}
         >
           + Create new

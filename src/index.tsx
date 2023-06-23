@@ -38,7 +38,7 @@ function Body(): JSX.Element {
   };
 
   return (
-    <div class="w-80 border border-[#5f6368] bg-[#202124] text-[#e8eaed]">
+    <div class="w-80 bg-base text-base-content dark:border dark:border-neutral">
       {tab() !== null && page()}
     </div>
   );
