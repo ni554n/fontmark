@@ -46,14 +46,14 @@ export function Bookmark(fontName: string, tabId: number) {
         emptyState={
           <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
             <button
-              class="mx-auto mt-1 block w-fit rounded-lg border border-current p-2 text-center text-accent hover:bg-accent/10"
+              class="border-current mx-auto mt-1 block w-fit rounded-lg border p-2 text-center text-accent hover:bg-accent/10"
               onClick={addIntoNewBookmark}
             >
               + New collection
             </button>
             <p class="w-3/4 text-center">
               This font will be added to a new bookmark in the{" "}
-              <span class="font-bold text-white">Other bookmarks</span> folder,
+              <span class="text-white font-bold">Other bookmarks</span> folder,
               but it can be reorganized.
             </p>
           </div>
@@ -127,6 +127,7 @@ export function Bookmark(fontName: string, tabId: number) {
       >
         <button
           class="ml-auto mt-1 block w-fit rounded-lg border border-neutral p-2 text-center"
+          title="Create a new bookmark in the Other bookmarks folder"
           onClick={addIntoNewBookmark}
         >
           + Create new
