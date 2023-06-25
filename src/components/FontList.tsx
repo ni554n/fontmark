@@ -23,7 +23,7 @@ export const [isEditing, setIsEditing] = createSignal(false);
 export const FontList: Component<{
   class: string;
   emptyState: JSXElement;
-  actionIndicator: (url: chrome.bookmarks.BookmarkTreeNode) => JSXElement;
+  actionIndicator: (bookmarkedFontNames: string[]) => JSXElement;
   children?: JSXElement;
   onCardClick: (
     bookmark: chrome.bookmarks.BookmarkTreeNode,
@@ -72,83 +72,84 @@ export const FontList: Component<{
       <div class="max-h-80 overflow-y-auto">
         <div class={`flex flex-col gap-3 ${props.class}`}>
           <For each={bookmarks}>
-            {(bookmark, index) => (
-              <div class="flex gap-2">
-                <button
-                  class="flex w-full items-center justify-between gap-2 rounded-lg border border-neutral p-4 text-start hover:border-accent hover:bg-accent/5"
-                  onClick={[clickCard, { bookmark, index }]}
-                  onMouseOver={() => setHoveringCard(bookmark.id)}
-                  onMouseOut={() => setHoveringCard("")}
-                >
-                  <div class="basis-[85%]">
-                    <div class="flex">
-                      <input
-                        type="text"
-                        value={bookmark.title}
-                        placeholder="Collection Name"
-                        class={`text-xm flex-1 bg-transparent ${
-                          isEditing()
-                            ? "rounded-sm outline outline-1 outline-offset-2 outline-base-content/60 focus:outline-accent"
-                            : "pointer-events-none"
+            {(bookmark, index) => {
+              const bookmarkedFontNames =
+                new URL(bookmark.url!).searchParams
+                  .get("selection.family")
+                  ?.split("|") || [];
+
+              return (
+                <div class="flex gap-2">
+                  <button
+                    class={`flex w-full items-center justify-between gap-4 rounded-lg border border-neutral p-4 text-start hover:bg-accent/5 ${
+                      isEditing() ? "" : "hover:border-accent"
+                    }`}
+                    onClick={[clickCard, { bookmark, index }]}
+                    onMouseOver={() => setHoveringCard(bookmark.id)}
+                    onMouseOut={() => setHoveringCard("")}
+                  >
+                    <div class="w-0 basis-[85%]">
+                      <div class="flex">
+                        <input
+                          type="text"
+                          value={bookmark.title}
+                          placeholder="Collection Name"
+                          class={`text-xm flex-1 bg-transparent ${
+                            isEditing()
+                              ? "rounded-sm outline outline-1 outline-offset-2 outline-base-content/40 focus:outline-accent"
+                              : "pointer-events-none"
+                          }`}
+                          onClick={(event) => event.stopPropagation()}
+                          onChange={(event) => {
+                            chrome.bookmarks.update(bookmark.id, {
+                              title: event.currentTarget.value,
+                            });
+                          }}
+                          onKeyPress={(event) => {
+                            if (event.key === "Enter")
+                              event.currentTarget.blur();
+                          }}
+                        />
+                      </div>
+
+                      <p
+                        class={`truncate text-neutral-content ${
+                          isEditing() ? "mt-1" : ""
                         }`}
-                        onClick={(event) => event.stopPropagation()}
-                        onChange={(event) => {
-                          chrome.bookmarks.update(bookmark.id, {
-                            title: event.currentTarget.value,
-                          });
-                        }}
-                        onKeyPress={(event) => {
-                          if (event.key === "Enter") event.currentTarget.blur();
-                        }}
-                      />
+                      >
+                        {bookmarkedFontNames.slice(0, 5).join(", ")}
+                      </p>
                     </div>
 
-                    <p
-                      class={`text-neutral-content ${
-                        isEditing() ? "mt-1" : null
+                    <div
+                      class={`swap-fade basis-[15%] text-center ${
+                        hoveringCard() === bookmark.id
+                          ? "[&>:last-child]:opacity-100"
+                          : "[&>:first-child]:opacity-100"
                       }`}
                     >
-                      {getFontNames(bookmark.url!)}
-                    </p>
-                  </div>
-
-                  {props.actionIndicator(bookmark)}
-                </button>
-
-                <Show when={isEditing()}>
-                  <button
-                    class="rounded-lg hover:text-accent"
-                    onClick={[
-                      deleteBookmark,
-                      { bookmarkId: bookmark.id, index },
-                    ]}
-                  >
-                    × Delete
+                      {props.actionIndicator(bookmarkedFontNames)}
+                    </div>
                   </button>
-                </Show>
-              </div>
-            )}
+
+                  <Show when={isEditing()}>
+                    <button
+                      class="rounded-lg hover:text-accent"
+                      onClick={[
+                        deleteBookmark,
+                        { bookmarkId: bookmark.id, index },
+                      ]}
+                    >
+                      × Delete
+                    </button>
+                  </Show>
+                </div>
+              );
+            }}
           </For>
-          {isEditing() ? null : props.children}
+          {isEditing() ? "" : props.children}
         </div>
       </div>
     </Show>
   );
 };
-
-function getFontNames(url: string): string {
-  const fontString = new URL(url).searchParams.get("selection.family");
-
-  if (!fontString) return "No fonts added";
-
-  const fonts = fontString.split("|");
-
-  const firstThree = fonts.slice(0, 3);
-  const remainingCount = fonts.length - firstThree.length;
-
-  const joined = firstThree.join(", ");
-
-  return remainingCount === 0
-    ? joined
-    : `${joined} and ${remainingCount} more…`;
-}

@@ -56,43 +56,32 @@ export function Importer(gFontUrl: URL) {
             </p>
           </div>
         }
-        actionIndicator={(
-          hoveredBookmark: chrome.bookmarks.BookmarkTreeNode,
-        ) => {
-          const savedFonts: string[] =
-            new URL(hoveredBookmark.url!).searchParams
-              .get("selection.family")
-              ?.split("|") ?? [];
-
+        actionIndicator={(bookmarkedFontNames) => {
           const areFontsImported =
-            savedFonts.length === new Set(savedFonts.concat(sharedFonts)).size;
+            bookmarkedFontNames.length ===
+            new Set(bookmarkedFontNames.concat(sharedFonts)).size;
 
           return (
-            <button
-              class={`swap-fade relative basis-[15%] before:content-['☆_Undo'] after:content-['★'] ${
-                isEditing() || !areFontsImported
-                  ? hoveringCard() === hoveredBookmark.id
-                    ? "opacity-100"
-                    : "opacity-0"
-                  : `opacity-100 ${
-                      hoveringCard() === hoveredBookmark.id
-                        ? "before:opacity-100"
-                        : "after:opacity-100"
-                    }`
-              }`}
-            >
-              {isEditing() ? (
-                <span>
-                  Ⅰ<br />
-                  Rename
-                </span>
-              ) : areFontsImported ? null : (
-                <span>
-                  +<br />
-                  Import
-                </span>
-              )}
-            </button>
+            <>
+              <div
+                class={`${
+                  areFontsImported && !isEditing()
+                    ? "text-lg text-accent"
+                    : "text-xs text-neutral-content"
+                }`}
+              >
+                {areFontsImported && !isEditing()
+                  ? "★"
+                  : `(${bookmarkedFontNames.length})`}
+              </div>
+              <div class="text-xs">
+                {isEditing()
+                  ? "Ⅰ\nRename"
+                  : areFontsImported
+                  ? "☆\nUndo"
+                  : "+\nImport"}
+              </div>
+            </>
           );
         }}
         onCardClick={(clickedBookmark, index) => {

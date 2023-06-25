@@ -58,42 +58,30 @@ export function Bookmark(fontName: string, tabId: number) {
             </p>
           </div>
         }
-        actionIndicator={(
-          hoveredBookmark: chrome.bookmarks.BookmarkTreeNode,
-        ) => {
-          const savedFonts: string[] =
-            new URL(hoveredBookmark.url!).searchParams
-              .get("selection.family")
-              ?.split("|") ?? [];
-
-          const isFontSaved: boolean = savedFonts.includes(fontName);
+        actionIndicator={(bookmarkedFontNames) => {
+          const isFontSaved: boolean = bookmarkedFontNames.includes(fontName);
 
           return (
-            <button
-              class={`swap-fade relative basis-[15%] before:content-['☆_Remove'] after:content-['★'] ${
-                isEditing() || !isFontSaved
-                  ? hoveringCard() === hoveredBookmark.id
-                    ? "opacity-100"
-                    : "opacity-0"
-                  : `opacity-100 ${
-                      hoveringCard() === hoveredBookmark.id
-                        ? "before:opacity-100"
-                        : "after:opacity-100"
-                    }`
-              }`}
-            >
-              {isEditing() ? (
-                <span>
-                  Ⅰ<br />
-                  Rename
-                </span>
-              ) : isFontSaved ? null : (
-                <span>
-                  +<br />
-                  Add
-                </span>
-              )}
-            </button>
+            <>
+              <div
+                class={`${
+                  isFontSaved && !isEditing()
+                    ? "text-lg text-accent"
+                    : "text-xs text-neutral-content"
+                }`}
+              >
+                {isFontSaved && !isEditing()
+                  ? "★"
+                  : `(${bookmarkedFontNames.length})`}
+              </div>
+              <div class="text-xs">
+                {isEditing()
+                  ? "Ⅰ\nRename"
+                  : isFontSaved
+                  ? "☆\nRemove"
+                  : "+\nAdd"}
+              </div>
+            </>
           );
         }}
         onCardClick={(clickedBookmark, index) => {

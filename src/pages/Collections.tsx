@@ -46,26 +46,13 @@ export function Collections() {
             </p>
           </div>
         }
-        actionIndicator={(hoveredBookmark) => (
-          <button
-            class={`relative basis-[15%] transition-opacity duration-500 ${
-              hoveringCard() === hoveredBookmark.id
-                ? "opacity-100"
-                : "opacity-0"
-            }`}
-          >
-            {isEditing() ? (
-              <span>
-                Ⅰ<br />
-                Rename
-              </span>
-            ) : (
-              <span>
-                ↗<br />
-                View
-              </span>
-            )}
-          </button>
+        actionIndicator={(bookmarkedFontNames: string[]) => (
+          <>
+            <div class="text-neutral-content">
+              ({bookmarkedFontNames.length})
+            </div>
+            <div class="text-xs">{isEditing() ? "Ⅰ\nRename" : "↗\nView"}</div>
+          </>
         )}
         onCardClick={(clickedBookmark) => {
           chrome.tabs.create({ url: clickedBookmark.url });

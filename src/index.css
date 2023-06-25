@@ -58,15 +58,15 @@
 
 @layer components {
   .swap-fade {
-    @apply transition-opacity duration-500;
+    @apply relative transition-opacity duration-500;
   }
 
-  .swap-fade::before {
+  .swap-fade > :first-child {
     @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300;
   }
 
-  .swap-fade::after {
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-lg text-accent opacity-0 transition-opacity duration-300;
+  .swap-fade > :last-child {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-accent opacity-0 transition-opacity duration-300;
   }
 
   button:has(span.ripple) {
