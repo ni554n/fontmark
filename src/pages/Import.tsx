@@ -13,22 +13,31 @@ export function Importer(gFontUrl: URL) {
   const sharedFonts: string[] =
     gFontUrl.searchParams.get("selection.family")?.split("|") ?? [];
 
-  const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
-    e,
-  ) => {
+  const addIntoNewBookmark: JSX.EventHandler<
+    HTMLButtonElement,
+    MouseEvent
+  > = async (e) => {
+    const buttonElement = e.currentTarget;
+
     animateRipple(e);
 
-    chrome.bookmarks.create(
-      {
-        title: "Collection - Google Fonts",
-        url: gFontUrl.href,
-      },
-      (addedBookmark) => {
-        setBookmarks(bookmarks.length, addedBookmark);
+    const fontsFolder = await chrome.bookmarks.search({ title: "Fonts" });
 
-        e.currentTarget.scrollIntoView({ behavior: "smooth" });
-      },
-    );
+    if (fontsFolder.length === 0) {
+      fontsFolder.push(
+        await chrome.bookmarks.create({ title: "Fonts", parentId: "1" }),
+      );
+    }
+
+    const addedBookmark = await chrome.bookmarks.create({
+      parentId: fontsFolder[0].id,
+      title: "Collection - Google Fonts",
+      url: gFontUrl.href,
+    });
+
+    setBookmarks(bookmarks.length, addedBookmark);
+
+    buttonElement.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -49,10 +58,9 @@ export function Importer(gFontUrl: URL) {
             </button>
 
             <p class="w-3/4 text-center">
-              A new bookmark will be added in the
-              <br />
-              <span class="font-bold">Other bookmarks</span> folder, but it can
-              be reorganized.
+              A new bookmark will be added in the{" "}
+              <span class="font-bold">Fonts</span> folder, which can be moved or
+              reorganized.
             </p>
           </div>
         }
@@ -119,7 +127,7 @@ export function Importer(gFontUrl: URL) {
       >
         <button
           class="ml-auto mt-1 block w-fit rounded-lg border border-neutral p-2 text-center"
-          title="Create a new bookmark in the Other bookmarks folder"
+          title="Create a new bookmark in the Fonts folder"
           onClick={addIntoNewBookmark}
         >
           + Create new

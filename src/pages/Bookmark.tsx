@@ -10,26 +10,35 @@ import { Header } from "../components/Header";
 import { animateRipple } from "../components/utils";
 
 export function Bookmark(fontName: string, tabId: number) {
-  const addIntoNewBookmark: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (
-    e,
-  ) => {
+  const addIntoNewBookmark: JSX.EventHandler<
+    HTMLButtonElement,
+    MouseEvent
+  > = async (e) => {
+    const buttonElement = e.currentTarget;
+
     animateRipple(e);
 
-    chrome.bookmarks.create(
-      {
-        title: "Collection - Google Fonts",
-        url: `https://fonts.google.com/share?selection.family=${fontName.replaceAll(
-          " ",
-          "+",
-        )}`,
-      },
-      (addedBookmark) => {
-        setBookmarks(bookmarks.length, addedBookmark);
+    const fontsFolder = await chrome.bookmarks.search({ title: "Fonts" });
 
-        e.currentTarget.scrollIntoView({ behavior: "smooth" });
-        chrome.action.setBadgeText({ tabId, text: "✓" });
-      },
-    );
+    if (fontsFolder.length === 0) {
+      fontsFolder.push(
+        await chrome.bookmarks.create({ title: "Fonts", parentId: "1" }),
+      );
+    }
+
+    const addedBookmark = await chrome.bookmarks.create({
+      parentId: fontsFolder[0].id,
+      title: "Collection - Google Fonts",
+      url: `https://fonts.google.com/share?selection.family=${fontName.replaceAll(
+        " ",
+        "+",
+      )}`,
+    });
+
+    setBookmarks(bookmarks.length, addedBookmark);
+
+    buttonElement.scrollIntoView({ behavior: "smooth" });
+    chrome.action.setBadgeText({ tabId, text: "✓" });
   };
 
   return (
@@ -52,9 +61,9 @@ export function Bookmark(fontName: string, tabId: number) {
               + New collection
             </button>
             <p class="w-3/4 text-center">
-              This font will be added to a new bookmark in the{" "}
-              <span class="text-white font-bold">Other bookmarks</span> folder,
-              but it can be reorganized.
+              This font will be added to a new bookmark in a{" "}
+              <span class="text-white font-bold">Fonts</span> folder, which can
+              be moved or reorganized.
             </p>
           </div>
         }
@@ -127,7 +136,7 @@ export function Bookmark(fontName: string, tabId: number) {
       >
         <button
           class="ml-auto mt-1 block w-fit rounded-lg border border-neutral p-2 text-center"
-          title="Create a new bookmark in the Other bookmarks folder"
+          title="Create a new bookmark in the Fonts folder"
           onClick={addIntoNewBookmark}
         >
           + Create new
