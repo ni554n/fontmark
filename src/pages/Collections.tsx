@@ -1,13 +1,9 @@
-import {
-  bookmarks,
-  FontList,
-  hoveringCard,
-  isEditing,
-} from "../components/FontList";
+import type { Component } from "solid-js";
+import { bookmarks, FontList, isEditing } from "../components/FontList";
 import { Header } from "../components/Header";
 import { pluralize } from "../components/utils";
 
-export function Collections() {
+const Collections: Component = () => {
   const countFonts = () => {
     let count = 0;
 
@@ -30,7 +26,7 @@ export function Collections() {
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2">
+          <div class="flex flex-1 flex-col items-center justify-center gap-2">
             <p>༼ つ ◕_◕ ༽つ</p>
             <p class="w-3/4 text-center text-sm">
               Visit a Google Fonts page like
@@ -60,4 +56,6 @@ export function Collections() {
       />
     </>
   );
-}
+};
+
+export default Collections;

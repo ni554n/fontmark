@@ -2,14 +2,17 @@ import { type JSX } from "solid-js/jsx-runtime";
 import {
   FontList,
   bookmarks,
-  hoveringCard,
   isEditing,
   setBookmarks,
 } from "../components/FontList";
 import { Header } from "../components/Header";
 import { animateRipple } from "../components/utils";
+import type { Component } from "solid-js";
 
-export function Bookmark(fontName: string, tabId: number) {
+const Bookmark: Component<{ fontName: string; tabId: number }> = ({
+  fontName,
+  tabId,
+}) => {
   const addIntoNewBookmark: JSX.EventHandler<
     HTMLButtonElement,
     MouseEvent
@@ -53,7 +56,7 @@ export function Bookmark(fontName: string, tabId: number) {
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
+          <div class="flex flex-1 flex-col items-center justify-center gap-2.5">
             <button
               class="border-current mx-auto mt-1 block w-fit rounded-lg border p-2 text-center text-accent hover:bg-accent/10"
               onClick={addIntoNewBookmark}
@@ -144,4 +147,6 @@ export function Bookmark(fontName: string, tabId: number) {
       </FontList>
     </>
   );
-}
+};
+
+export default Bookmark;

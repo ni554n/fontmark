@@ -2,14 +2,14 @@ import type { JSX } from "solid-js/jsx-runtime";
 import {
   FontList,
   bookmarks,
-  hoveringCard,
   isEditing,
   setBookmarks,
 } from "../components/FontList";
 import { Header } from "../components/Header";
 import { animateRipple, pluralize } from "../components/utils";
+import type { Component } from "solid-js";
 
-export function Importer(gFontUrl: URL) {
+const Importer: Component<{ gFontUrl: URL }> = ({ gFontUrl }) => {
   const sharedFonts: string[] =
     gFontUrl.searchParams.get("selection.family")?.split("|") ?? [];
 
@@ -49,7 +49,7 @@ export function Importer(gFontUrl: URL) {
       <FontList
         class="px-3 py-3.5"
         emptyState={
-          <div class="flex h-40 flex-1 flex-col items-center justify-center gap-2.5">
+          <div class="flex flex-1 flex-col items-center justify-center gap-2.5">
             <button
               class="mx-auto mt-1 block w-fit rounded-lg border border-neutral p-2 text-center"
               onClick={addIntoNewBookmark}
@@ -135,4 +135,6 @@ export function Importer(gFontUrl: URL) {
       </FontList>
     </>
   );
-}
+};
+
+export default Importer;
