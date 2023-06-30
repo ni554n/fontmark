@@ -1,4 +1,4 @@
-import { createSignal, lazy, type JSX, type Component, Show } from "solid-js";
+import { Show, createSignal, lazy, type JSX } from "solid-js";
 import { render } from "solid-js/web";
 import "./index.css";
 

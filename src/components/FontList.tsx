@@ -1,12 +1,12 @@
 import {
   For,
   Show,
+  batch,
   createSignal,
   type Accessor,
   type Component,
   type JSX,
   type JSXElement,
-  batch,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { animateRipple } from "./utils";

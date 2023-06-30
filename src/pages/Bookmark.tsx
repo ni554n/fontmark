@@ -1,3 +1,4 @@
+import type { Component } from "solid-js";
 import { type JSX } from "solid-js/jsx-runtime";
 import {
   FontList,
@@ -7,7 +8,6 @@ import {
 } from "../components/FontList";
 import { Header } from "../components/Header";
 import { animateRipple } from "../components/utils";
-import type { Component } from "solid-js";
 
 const Bookmark: Component<{ fontName: string; tabId: number }> = ({
   fontName,
