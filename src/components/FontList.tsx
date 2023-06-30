@@ -82,7 +82,7 @@ export const FontList: Component<{
           <div class={`flex flex-col gap-3 ${props.class}`}>
             <For each={bookmarks}>
               {(bookmark, index) => {
-                const bookmarkedFontNames =
+                const bookmarkedFontNames = () =>
                   new URL(bookmark.url!).searchParams
                     .get("selection.family")
                     ?.split("|") || [];
@@ -126,7 +126,7 @@ export const FontList: Component<{
                             isEditing() ? "mt-1" : ""
                           }`}
                         >
-                          {bookmarkedFontNames.slice(0, 5).join(", ")}
+                          {bookmarkedFontNames().slice(0, 5).join(", ")}
                         </p>
                       </div>
 
@@ -137,7 +137,7 @@ export const FontList: Component<{
                             : "[&>:first-child]:opacity-100"
                         }`}
                       >
-                        {props.actionIndicator(bookmarkedFontNames)}
+                        {props.actionIndicator(bookmarkedFontNames())}
                       </div>
                     </button>
 
