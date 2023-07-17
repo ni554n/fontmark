@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Fontmark",
   "version": "1.0",
-  "description": "Manage Google Fonts using Bookmarks",
+  "description": "Manage & preview your favorite Google Fonts using bookmarks.",
   "icons": {
     "16": "assets/icon16.png",
     "32": "assets/icon32.png",
