@@ -43,7 +43,7 @@ function Body(): JSX.Element {
   };
 
   return (
-    <div class="h-[25rem] w-80 bg-base text-base-content dark:border dark:border-neutral">
+    <div class="h-[26rem] w-80 bg-base text-base-content dark:border dark:border-neutral">
       <div class="flex h-full flex-col">
         <Show when={tab() !== null}>
           <Page />
