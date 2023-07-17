@@ -1,4 +1,6 @@
-# Fontmark
+<div align="center"><img src=".doc/marquee.png" width="600px" /></div>
+
+---
 
 Manage & preview your favorite Google Fonts using bookmarks.
 
@@ -10,19 +12,20 @@ Each collection is a simple bookmark where you can add as many fonts as you like
 
 ## Usage
 
+<a href="https://chrome.google.com/webstore/detail/"><img src=".doc/chrome-web-store-badge.png" width="200px" align="right" /></a>
+
 Bookmark collections are initially saved in a folder named "Fonts", but it can be moved anywhere else. You can also view or edit the collections from anywhere.
 
 To add or remove a font from a collection, visit the Google font's page such as [/Roboto](https://fonts.google.com/specimen/Roboto) and use the extension menu.
 
 You can also import all fonts from a collection to another or remove them from an existing collection if you are open the collection preview page such as [this](https://fonts.google.com/share?selection.family=Roboto|Open+Sans|Lato) on Google Fonts website.
 
-## Manual Installation
+## Build
 
 1. [Download this repo](https://github.com/ni554n/fontmark/archive/refs/heads/main.zip) and extract it somewhere permanent
-
-2. Go to [Chrome Extensions](chrome://extensions/) page and enable `Developer Mode` from the top right corner
-
-3. Click `Load Unpacked` button and select the extracted _**fontmark-main**_ folder
+2. Run `npm install` and `npm run build`
+3. Go to [Chrome Extensions](chrome://extensions/) page and enable `Developer Mode` from the top right corner
+4. Click `Load Unpacked` button and select the extracted _**fontmark-main**_ folder
 
 ## Information
 
