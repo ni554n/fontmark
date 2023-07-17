@@ -1,6 +1,4 @@
-<div align="center"><img src=".doc/marquee.png" width="600px" /></div>
-
----
+<div align="center"><img src=".doc/marquee.png" width="600px" /><h1><a href="https://chrome.google.com/webstore/detail/"><img src=".doc/chrome-web-store-badge.png" width="200px" /></a></h1></div>
 
 Manage & preview your favorite Google Fonts using bookmarks.
 
@@ -11,8 +9,6 @@ Each collection is a simple bookmark where you can add as many fonts as you like
 > Luckily, the Google Fonts website has a feature to preview a group of fonts for sharing, which gave me the idea to create a bookmark manager that keeps track of my font collection using just a handful of bookmarks.
 
 ## Usage
-
-<a href="https://chrome.google.com/webstore/detail/"><img src=".doc/chrome-web-store-badge.png" width="200px" align="right" /></a>
 
 Bookmark collections are initially saved in a folder named "Fonts", but it can be moved anywhere else. You can also view or edit the collections from anywhere.
 
@@ -32,4 +28,4 @@ You can also import all fonts from a collection to another or remove them from a
 **Author:** [Nissan Ahmed](https://anissan.com) ([@ni554n](https://twitter.com/ni554n))
 
 **Donate:** [PayPal](https://paypal.me/ni554n)
-<img src="https://ping.anissan.com/?repo=fontmark" width="0" height="0" align="right">
+<!-- <img src="https://ping.anissan.com/?repo=fontmark" width="0" height="0" align="right"> -->
