@@ -85,7 +85,8 @@ export const FontList: Component<{
                 const bookmarkedFontNames = () =>
                   new URL(bookmark.url!).searchParams
                     .get("selection.family")
-                    ?.split("|") || [];
+                    ?.split("|")
+                    .filter(Boolean) ?? [];
 
                 return (
                   <div class="flex gap-2">
