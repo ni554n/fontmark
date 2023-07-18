@@ -1,4 +1,4 @@
-<div align="center"><img src=".doc/marquee.png" width="600px" /><h1><a href="https://chrome.google.com/webstore/detail/fontmark/hagjnfpnbaddimijdfbhhjhfiaenklfc"><img src=".doc/chrome-web-store-badge.png" width="200px" /></a></h1></div>
+<div align="center"><img src=".doc/marquee.png" width="600px" /><h1><a href="https://chrome.google.com/webstore/detail/fontmark/hagjnfpnbaddimijdfbhhjhfiaenklfc"><img src=".doc/chrome-web-store-badge.png" width="160px" /></a></h1></div>
 
 Manage & preview your favorite Google Fonts using bookmarks.
 
