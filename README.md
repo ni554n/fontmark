@@ -1,4 +1,4 @@
-<div align="center"><img src=".doc/marquee.png" width="600px" /><h1><a href="https://chrome.google.com/webstore/detail/"><img src=".doc/chrome-web-store-badge.png" width="200px" /></a></h1></div>
+<div align="center"><img src=".doc/marquee.png" width="600px" /><h1><a href="https://chrome.google.com/webstore/detail/fontmark/hagjnfpnbaddimijdfbhhjhfiaenklfc"><img src=".doc/chrome-web-store-badge.png" width="200px" /></a></h1></div>
 
 Manage & preview your favorite Google Fonts using bookmarks.
 
@@ -28,4 +28,4 @@ You can also import all fonts from a collection to another or remove them from a
 **Author:** [Nissan Ahmed](https://anissan.com) ([@ni554n](https://twitter.com/ni554n))
 
 **Donate:** [PayPal](https://paypal.me/ni554n)
-<!-- <img src="https://ping.anissan.com/?repo=fontmark" width="0" height="0" align="right"> -->
+<img src="https://ping.anissan.com/?repo=fontmark" width="0" height="0" align="right">
