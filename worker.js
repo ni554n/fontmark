@@ -1,19 +1,25 @@
-chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
   if (changeInfo.status !== "loading" || !changeInfo.url) return;
 
   const paths = new URL(changeInfo.url).pathname.split("/");
   const specimenIndex = paths.indexOf("specimen");
 
-  if (specimenIndex !== -1) {
-    chrome.bookmarks.search("https://fonts.google.com/share?", (bookmarks) => {
-      const fontName = paths[specimenIndex + 1];
+  let isFontSaved = false;
 
-      for (const bookmark of bookmarks) {
-        if (bookmark.url?.includes(fontName)) {
-          chrome.action.setBadgeText({ tabId, text: "✓" });
-          break;
-        }
+  if (specimenIndex !== -1) {
+    const fontName = paths[specimenIndex + 1];
+
+    const bookmarks = await chrome.bookmarks.search(
+      "https://fonts.google.com/share?",
+    );
+
+    for (const bookmark of bookmarks) {
+      if (bookmark.url?.includes(fontName)) {
+        isFontSaved = true;
+        break;
       }
-    });
+    }
   }
+
+  chrome.action.setBadgeText({ tabId, text: isFontSaved ? "✓" : "" });
 });
