@@ -3,7 +3,7 @@ import { bookmarks, FontList, isEditing } from "../components/FontList";
 import { Header } from "../components/Header";
 import { pluralize } from "../components/utils";
 
-const Collections: Component = () => {
+const Collections: Component<{ tabIndex: number }> = (props) => {
   const countFonts = () => {
     let count = 0;
 
@@ -51,7 +51,10 @@ const Collections: Component = () => {
           </>
         )}
         onCardClick={(clickedBookmark) => {
-          chrome.tabs.create({ url: clickedBookmark.url });
+          chrome.tabs.create({
+            index: props.tabIndex + 1,
+            url: clickedBookmark.url,
+          });
         }}
       />
     </>

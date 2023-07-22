@@ -14,7 +14,7 @@ function Body(): JSX.Element {
 
     if (!url) {
       const Collections = lazy(() => import("./pages/Collections"));
-      return <Collections />;
+      return <Collections tabIndex={tab()?.index ?? 0} />;
     }
 
     const gFontUrl = new URL(url);
@@ -39,7 +39,7 @@ function Body(): JSX.Element {
     }
 
     const Collections = lazy(() => import("./pages/Collections"));
-    return <Collections />;
+    return <Collections tabIndex={tab()?.index ?? 0} />;
   };
 
   return (
