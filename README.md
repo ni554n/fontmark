@@ -2,7 +2,7 @@
 
 Manage & preview your favorite Google Fonts using bookmarks.
 
-Each collection is a simple bookmark where you can add as many fonts as you like. These collections of fonts can be previewed in a single page on Google Fonts website.
+Each collection is a simple bookmark where you can add as many fonts as you like. These collections of fonts can be [previewed](https://fonts.google.com/share?selection.family=Eczar|Righteous|Merienda) in a single page on Google Fonts website.
 
 > I used to bookmark my favorite Google fonts individually, but it quickly became tedious to go through them one by one when I needed to choose one for a project.
 >
