@@ -1,5 +1,3 @@
 {
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "trailingComma": "all",
-  "singleQuote": false
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
