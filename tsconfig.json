@@ -2,6 +2,7 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "include": ["src/**/*"],
     "isolatedModules": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
